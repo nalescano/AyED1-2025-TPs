@@ -8,6 +8,7 @@ def pedir_numeros(numeros: list[int]) -> list[int]:
 
     Post: la lista "numeros" contendrá tres números ingresados por el usuario.
     """
+
     for i in range(3):
         numero_usuario = int(input("Ingrese un número desde el 1 al 9: "))
         numeros.append(numero_usuario)
@@ -23,6 +24,7 @@ def buscar_nro_mayor(numeros: list[int]) -> None:
         - si algún número aparece más de una vez, se imprime -1.
         - si todos los números son distintos, se imprime el mayor.
     """
+    
     for i in numeros:
         if numeros.count(i) > 1:
             print(-1)
