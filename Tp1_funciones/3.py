@@ -15,7 +15,7 @@ def gasto_total_mensual(cant_viajes_mensuales: int) -> int:
     return gasto_total
 
 
-def calcular_importe_final(cant_viajes_mensuales: int) -> str:
+def calcular_importe_final(cant_viajes_mensuales: int) -> None:
 
     '''
     llama una funcion para calcular el valor total del mes y despues aplica el descuento segun la cantidad de viajes realizados.
