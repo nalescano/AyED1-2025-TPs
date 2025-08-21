@@ -1,5 +1,3 @@
-cant_viajes_mensuales = int(input('Ingrese la cantidad de viajes realizados en un mes: '))
-
 
 def gasto_total_mensual(cant_viajes_mensuales: int) -> int:
     
@@ -15,15 +13,17 @@ def gasto_total_mensual(cant_viajes_mensuales: int) -> int:
     return gasto_total
 
 
-def calcular_importe_final(cant_viajes_mensuales: int) -> None:
+def calcular_importe_final() -> None:
 
     '''
-    llama una funcion para calcular el valor total del mes y despues aplica el descuento segun la cantidad de viajes realizados.
+    pide al usuario un valor entero correspondiente a la cantidad de viajes que realizo en un mes. Luego llama a una funcion para calcular el valor total del mes y despues aplica el descuento segun la cantidad de viajes realizados.
 
     Pre: ingresa como parametro un entero de la cantidad de viajes hecho en el mes.
 
     Post: devuelve un mensaje por consola.
     '''
+
+    cant_viajes_mensuales = int(input('Ingrese la cantidad de viajes realizados en un mes: '))
 
     gasto_total = gasto_total_mensual(cant_viajes_mensuales)
 
@@ -44,7 +44,7 @@ def calcular_importe_final(cant_viajes_mensuales: int) -> None:
 
 
 def main():
-    calcular_importe_final(cant_viajes_mensuales)
+    calcular_importe_final()
 
 if __name__ == '__main__':
     main()
