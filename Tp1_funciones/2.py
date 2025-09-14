@@ -1,85 +1,115 @@
-def recibir_numeros() -> int:
-    """
-    Pide tres números enteros
-    Pre: No recibe parametros iniciales
-    Post: Devuelve tres variables enteras
-    """
-
-    dia = int(input("Ingrese un día del 1 al 30: "))
-    mes = int(input("Ingrese un mes del 1 al 12: "))
-    anio = int(input("Ingrese un año (mayor a 0): "))
-    return dia, mes, anio
-
-def verificar_anio(anio: int) ->bool:
+def validar_anio(anio:int) -> bool:
     '''
-    verifica si el anio que se ingreso no sea menor a cero.
-    Pre: ingresa el anio que ingreso el usuario.
-    Post: devuelve True si el anio es mayor a cero, y False si es menor o igual a cero.
+    verifica que el anio que ingresa sea menor al anio actual.
+    
+    pre: 
+        - un numero entero positivo (anio).
+    post: 
+        - devuelve (True) si el anio es menor a 2025.
+        - si es mayor muestra un mensaje en consola y retorna (False).
     '''
-    if anio >= 0:
+
+    if anio <= 2025:
         return True
     else:
+        print('el anio que ingreso todavia no ocurrio')
         return False
+
+
+def verificar_bisiesto(anio: int, mes_2: int) -> bool:
+    '''
+    verifica si el entero es divisible por 400 y 2.
     
-def verificar_mes(mes:int) -> bool:
+    pre: 
+        - dos enteros positivos (anio y mes_2)
+    post: 
+        - devuelve (True) si el anio es divisible por 400 o por 4.
+        - si no es divisible devuelve (False)
     '''
-    verifica si el mes que ingreso el usuario es mayor a cero y menor a 12.
-    Pre: ingresa el mes que ingreso el usuario.
-    Post: devuelve True se el mes es mayor a cero y menor a 12, y False si es mayor a doce o menor a cero.
-    '''
-    if mes > 0 or mes < 12:
+
+    if (anio % 400 == 0) or (anio % 4 == 0):
+        mes_2 = 29
+        print('el anio que ingreso es bisiesto')
         return True
-    else:
+    else: return False
+    
+    
+def verifiar_dia(dia: int, mes: int, mes_30: list[int], mes_31: list[int], es_bisiesto: bool) -> bool:
+    '''
+    verifica que el dia que ingreso sea valido.
+    
+    Pre: 
+        - dos enteros positivos (dia y mes).
+        - dos listas de enteros (meses con 30 y con 31 dias).
+        - un booleano (indica si el anio es bisiesto).
+    post: 
+        - devuelve (True) si el dia corresponde a un mes valido y respeta el rango de dias permitidos (considerando febrero y los anios bisiestos).
+        - devuelve (False) en caso contrario.
+    '''
+
+    if (dia <= 0) or (dia > 31):
         return False
-    
-def verificar_si_es_bisiesto(anio, dias_por_mes) -> str:
+    elif mes in mes_30:
+        if dia <= 30:
+            return True
+        else: 
+            return False
+    elif mes in mes_31:
+        if dia <= 31:
+            return True
+        else:
+            return False
+    elif mes == 2:
+        if dia <= 28:
+            return True
+        elif es_bisiesto == True:
+            dia = 29
+            return True
+        else:
+            return False
+    else: return False
+
+
+def verificar_fecha(dia: int, mes: int, anio: int) -> None:
+    ''' 
+    verifica si la fecha ingresada es valida.
+
+    pre: 
+        - tres enteros positivos (dia, mes, anio).
+    post: 
+        - muestra en consola un mensaje.
     '''
-    verifica si el anio que ingreso el usuario dividido por cuatro, por cien y por cuatrocientos da un resto de cero.
-    Pre: ingresa el anio que ingreso el usuario y el diccionario de dias por mes.
-    Post: imprime por consola si el anio es bisiesto o no.
-    '''
-    if (anio % 4 == 0 and anio % 100 !=0) or (anio % 400 == 0):
-        dias_por_mes[2] = 29
-        print('Es año bisiesto')
+
+    mes_30 = [4, 6, 9, 11]
+    mes_31 = [1, 3, 5, 7, 8, 10, 12]
+    mes_2 = 28
+
+    anio_es_valido = validar_anio(anio)
+    es_bisiesto = verificar_bisiesto(anio, mes_2)
+    dia_es_valido = verifiar_dia(dia, mes, mes_30, mes_31, es_bisiesto)
+
+    if anio_es_valido and dia_es_valido == True:
+        print('la fecha que ingreso es valida')
     else:
-        print('el anio no es bisiesto')
+        print('la fecha que ingreso no es valida')
 
 
-def verificar_fecha_valida(dia: int, mes: int, anio: int) -> bool:
-    """
-    verifica si el año y el mes es correcto, se crea un diccionario de dias. Y, verifica si el año que se ingreso es bisiesto o no.
-    Pre: Recibe tres parametros correspondientes al dia, mes y anio (en ese orden).
-    Post: Si los datos ingresados son correctos devuelve True, sino devuelve False
-    """
-
-    dias_por_mes = {1:31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
-
-    verificar_anio(anio)
-    
-    verificar_mes(mes)
-
-    verificar_si_es_bisiesto(anio, dias_por_mes)
-    
-    if (verificar_anio == True) and (verificar_mes == True):
-        return True
-    else:
-        return False
-    
-def mensaje(verificacion:bool) -> str:
+def main() -> None:
     '''
-    compara la variable verificacion e imprime un mensaje por consola.
-    Pre: Recibe como parametro un booleano de la funcion verificar_fecha_valida
-    Post: imprime un mensaje por consola.
+    funcion principal.
+    pre:
+        - no recibe parametros.
+
+    post: 
+        - solicita al usuario tres numeros enteros (dia, mes y anio)
+        - llama a la funcion verificar_fecha
+    
     '''
-    if verificacion == True:
-        print('La fecha que ingreso es correcta')
-    else:
-        print('La fecha que ingreso es incorrecta')
+    dia = int(input('ingrese un nro del 1 al 30 - 31: '))
+    mes = int(input('ingrese un nro del 1 al 12: '))
+    anio = int(input('ingrese un nro de 4 digitos: '))
 
-def main():
-    dia, mes, anio = recibir_numeros()
-    verificacion = verificar_fecha_valida(dia, mes, anio)
-    mensaje(verificacion)
+    verificar_fecha(dia, mes, anio)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
