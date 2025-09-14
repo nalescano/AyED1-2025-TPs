@@ -1,8 +1,8 @@
 def pedir_nros()-> list[int]:
     '''
     pide tres nros enteros, los carga en una lista y los retorna
-    Pre: no ingresa ningun parametro a la funcion.
-    Post: devuelve tres numeros enteros
+    Pre: no ingresa ningun parametro.
+    Post: devuelve tres numeros enteros.
     '''
     nros = []
     for i in range(3):
@@ -14,8 +14,8 @@ def pedir_nros()-> list[int]:
 def verificar_si_hay_repetidos(nros:list[int]) -> bool:
     '''
     verifica si en la lista que ingresa hay nros enteros repetidos
-    Pre: ingresa una lista de nros enteros
-    Post: Devuelve True si los tres nros son distintos, sino devuelve False
+    Pre: ingresa una lista de enteros.
+    Post: Devuelve un valor booleano que indica (True) si los tres nros son distintos, sino (False)
     '''
     
     if nros[0] != nros[2]:
@@ -33,8 +33,8 @@ def verificar_si_hay_repetidos(nros:list[int]) -> bool:
 def devolver_el_mayor(nros:list[int]) -> int:
     '''
     si la funcion verificar_si_hay_repetidos es True compara la lista de nros para buscar el valor mayor
-    Pre: ingresa una lista de numeros enteros
-    Post: devuelve -1 si hay repetidos en la lista ó, el nro mayor de la lista de enteros.
+    Pre: ingresa una lista de enteros.
+    Post: devuelve -1 si hay repetidos en la lista o un entero de la lista de enteros.
     '''
 
     if verificar_si_hay_repetidos(nros) == True:
@@ -49,6 +49,11 @@ def devolver_el_mayor(nros:list[int]) -> int:
         
 
 def main():
+    '''
+    funcion principal del programa.
+    pre: no recibe parametros.
+    post: ejecuta la logica principal del programa. no retorna ningun valor.
+    '''
     nros = pedir_nros()
     valor = devolver_el_mayor(nros)
     print(valor)
