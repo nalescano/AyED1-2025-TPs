@@ -91,6 +91,6 @@ def main()-> None:
     else:
         print('no es capicua')
 
+
 if __name__ == "__main__":
     main()
-
